@@ -12,7 +12,9 @@ public class JavaApplication16 {
 
     
     public static void main(String[] args) {
-       
+        Menu o = new Menu();
+        o.setup();
     }
     
 }
+
