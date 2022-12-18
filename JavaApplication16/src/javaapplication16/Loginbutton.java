@@ -22,22 +22,34 @@ public class Loginbutton implements ActionListener {
       button.setFont(new Font("Courier New", Font.PLAIN, 18));
       button.addActionListener(new Menu());
       return button;
+      
+    
 }
+ 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Menu o = new Menu();
-        String text=o.getUserText().getText();
-        boolean match=text.matches("[a-zA-Z]+");
-       if (match){
-           //open Game JPanel
-         //  success.setVisible(true);
-         //  success.setText("Go");
+      
+       Menu o = new Menu();
+       String text=o.getUserText().getText();
+       
+      boolean match=text.matches("[a-zA-Z]+");
+       if (match==true){
+           if(o.getEasy().isSelected()){
+      o.setWhichLevel(1);
+      System.out.println("raboti");
+      }
+      else if (o.getMedium().isSelected()){
+      o.setWhichLevel(2);
+      }
+      else if(o.getHard().isSelected()){
+          o.setWhichLevel(3);
+      }
+      else System.out.println("Select level");
        }
        else {
            throw new java.util.InputMismatchException("Enter letters!");
             
        } 
-        
-        
-    }
+      }
+   
 }
