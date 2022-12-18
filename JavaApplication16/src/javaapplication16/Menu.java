@@ -8,12 +8,13 @@ package javaapplication16;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
+import javax.swing.ButtonGroup;
+import javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JTextField;
+
 
 /**
  *
@@ -28,12 +29,28 @@ public class Menu implements ActionListener{
     private static JRadioButton easy;
     private static JRadioButton medium;
     private static JRadioButton hard;
-    
+    private static int whichLevel;
 
-     
+     public JRadioButton getEasy(){
+         return easy;
+     }
+    
+    public JRadioButton getMedium (){
+         return medium;
+     }
+    public JRadioButton getHard (){
+         return hard;
+     }
+    
+    public void setWhichLevel (int whichLevel) {
+       if(whichLevel==1||whichLevel==2||whichLevel==3)
+           this.whichLevel=whichLevel;
+    }
+    
 
     public void setup() {
      Exitbutton b = new Exitbutton();
+     Loginbutton l=new Loginbutton();
       JFrame frame=new JFrame();
       JPanel panel=new JPanel();
       frame.setSize(500,300);
@@ -55,11 +72,13 @@ public class Menu implements ActionListener{
       button=new JButton("Login");
       button.setBounds(70,220,100,25);
       button.setFont(new Font("Courier New", Font.PLAIN, 18));
-      button.addActionListener(new Menu());
+      
       panel.add(button);
       
       
       panel.add(b.setupButton());
+      System.out.println("Wutre sme");
+      panel.add(l.setupLoginbutton());
    
        labelLevel=new JLabel("Level:");
       labelLevel.setBounds(20, 50, 100, 25);
@@ -84,43 +103,35 @@ public class Menu implements ActionListener{
       panel.add(hard);
       hard.setBackground(new java.awt.Color(211, 234, 245));
       
+      ButtonGroup G=new ButtonGroup();
+      G.add(easy);
+      G.add(medium);
+      G.add(hard);
       
-      
-      
-      
-      
-      
-      
+    
       frame.setVisible(true);
-
-      
       
 
     }
   
-    
-    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String text=userText.getText();
-        boolean match=text.matches("[a-zA-Z]+");
-       if (match){
-           //open Game JPanel
-         //  success.setVisible(true);
-         //  success.setText("Go");
-       }
-       else {
-           throw new java.util.InputMismatchException("Enter letters!");
-            
-       } 
-        
-        
+    public JTextField getUserText(){
+        return userText;
     }
 
-   
-   
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+}
+
+  
+
     
+
+   
+     
     
     
 
-}
+
