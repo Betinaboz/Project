@@ -4,42 +4,44 @@
  */
 package javaapplication16;
 
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 
 /**
  *
- * @author vikto
- */
-
-  
-//import java.util.regex.Matcher;
-//import java.util.regex.Pattern;
-
-/**
- *
- * @author vikto
+ * @author Blagovesta
  */
 public class Menu implements ActionListener{
 
     private static JLabel label;
+    private static JLabel labelLevel;
     private static JTextField userText;
     private static JButton button;
-   // private static JButton success;
+    private static JRadioButton easy;
+    private static JRadioButton medium;
+    private static JRadioButton hard;
+    
 
      
 
-    public static void main(String[] args) {
-     
+    public void setup() {
+     Exitbutton b = new Exitbutton();
       JFrame frame=new JFrame();
       JPanel panel=new JPanel();
-      frame.setSize(400,500);
+      frame.setSize(500,300);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.add(panel);
       panel.setLayout(null);
       panel.setBackground(new java.awt.Color(211, 234, 245));
+      
 
       label=new JLabel("Name:");
       label.setBounds(20, 20, 60, 25);
@@ -51,20 +53,48 @@ public class Menu implements ActionListener{
       panel.add(userText);
 
       button=new JButton("Login");
-      button.setBounds(50,390,100,25);
+      button.setBounds(70,220,100,25);
       button.setFont(new Font("Courier New", Font.PLAIN, 18));
       button.addActionListener(new Menu());
       panel.add(button);
       
-   /*   success=new JButton("");
-      success.setBounds(280,150,100,25);
-      success.setFont(new Font("Courier New", Font.PLAIN, 18));
-      success.setVisible(false);
-      success.addActionListener(new Menu());
-      panel.add(success);
-  */
+      
+      panel.add(b.setupButton());
+   
+       labelLevel=new JLabel("Level:");
+      labelLevel.setBounds(20, 50, 100, 25);
+      labelLevel.setFont(new Font("Courier New", Font.PLAIN, 18));
+      panel.add(labelLevel);
+      
+      easy = new JRadioButton ("Easy");
+      easy.setBounds(100, 50, 80, 25);
+      easy.setFont(new Font("Courier New", Font.PLAIN, 18));
+      panel.add(easy);
+      easy.setBackground(new java.awt.Color(211, 234, 245));
+      
+      medium = new JRadioButton ("Medium");
+      medium.setBounds(100, 90, 120, 25);
+      medium.setFont(new Font("Courier New", Font.PLAIN, 18));
+      panel.add(medium);
+      medium.setBackground(new java.awt.Color(211, 234, 245));
+      
+      hard = new JRadioButton ("Hard");
+      hard.setBounds(100, 130, 80, 25);
+      hard.setFont(new Font("Courier New", Font.PLAIN, 18));
+      panel.add(hard);
+      hard.setBackground(new java.awt.Color(211, 234, 245));
+      
+      
+      
+      
+      
+      
+      
+      
       frame.setVisible(true);
 
+      
+      
 
     }
   
@@ -86,6 +116,9 @@ public class Menu implements ActionListener{
         
         
     }
+
+   
+   
     
     
     
