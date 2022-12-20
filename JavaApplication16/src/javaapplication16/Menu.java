@@ -47,6 +47,10 @@ public class Menu implements ActionListener{
            this.whichLevel=whichLevel;
     }
     
+    public int getWhichLevel(){
+        return whichLevel;
+    }
+    
 
     public void setup() {
      Exitbutton b = new Exitbutton();
@@ -68,16 +72,8 @@ public class Menu implements ActionListener{
       userText=new JTextField(40);
       userText.setBounds(100,20,205,25);
       panel.add(userText);
-
-      button=new JButton("Login");
-      button.setBounds(70,220,100,25);
-      button.setFont(new Font("Courier New", Font.PLAIN, 18));
-      
-      panel.add(button);
-      
       
       panel.add(b.setupButton());
-      System.out.println("Wutre sme");
       panel.add(l.setupLoginbutton());
    
        labelLevel=new JLabel("Level:");
@@ -122,6 +118,8 @@ public class Menu implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+   
 
 }
 
