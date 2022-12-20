@@ -45,9 +45,31 @@ public class Game {
         return bombCount;
     }
     
+    public void setLevel(){
+        
+        switch (new Menu().getWhichLevel()){
+            case 1: 
+                heigth=10;
+                width=10;
+                bombCount=10;
+                break;
+            case 2:
+                heigth=15;
+                width=15;
+                bombCount=15;
+                break;
+            case 3:
+                heigth=20;
+                width=20;
+                bombCount=20;
+                break;
+        }
+    }
     
     
     public void setupGame() {
+        
+      setLevel();
      JFrame gameFrame=new JFrame();
       JPanel gamePanel=new JPanel();
       gameFrame.setSize(tileWidth*width,tileHeigth*heigth);
@@ -55,8 +77,10 @@ public class Game {
       gameFrame.add(gamePanel);
       gamePanel.setLayout(null);
       gamePanel.setBackground(new java.awt.Color(211, 234, 245));
+        System.out.println(width);
+        System.out.println(heigth);
       
-      
+       gameFrame.setVisible(true);
       
 }
 }
