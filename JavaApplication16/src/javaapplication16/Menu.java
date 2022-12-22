@@ -30,6 +30,8 @@ public class Menu implements ActionListener{
     private static JRadioButton medium;
     private static JRadioButton hard;
     private static int whichLevel;
+    public static JFrame frame=new JFrame();
+    
 
      public JRadioButton getEasy(){
          return easy;
@@ -55,7 +57,6 @@ public class Menu implements ActionListener{
     public void setup() {
      Exitbutton b = new Exitbutton();
      Loginbutton l=new Loginbutton();
-      JFrame frame=new JFrame();
       JPanel panel=new JPanel();
       frame.setSize(500,300);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -106,10 +107,13 @@ public class Menu implements ActionListener{
       
     
       frame.setVisible(true);
-      
+   
 
     }
-  
+    
+    
+    
+    
     public JTextField getUserText(){
         return userText;
     }
