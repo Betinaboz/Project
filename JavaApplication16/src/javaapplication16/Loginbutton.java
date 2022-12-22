@@ -5,6 +5,7 @@
 package javaapplication16;
 
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -48,6 +49,8 @@ public class Loginbutton implements ActionListener {
       } 
      
        g.setupGame();
+       Menu.frame.dispose();
+       
            
     } 
    else {
