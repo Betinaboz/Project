@@ -4,6 +4,9 @@
  */
 package javaapplication16;
 
+import java.awt.Button;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -20,6 +23,13 @@ public class Game implements ActionListener{
     private static int heigth;
     private static int bombCount;
     private static int flags;
+    public int timeX = 300;
+    public int timeY = 60;
+    
+    
+    
+    
+    
     
     public void setWidth(int width){
         if(width>0)
@@ -62,8 +72,8 @@ public class Game implements ActionListener{
                 bombCount=15;
                 break;
             case 3:
-                heigth=35;
-                width=35;
+                heigth=30;
+                width=30;
                 bombCount=20;
                 break;
         }
@@ -77,71 +87,49 @@ public class Game implements ActionListener{
      gameFrame.setSize(tileWidth*width,(tileHeigth*heigth)+70);
      gameFrame.setLayout(null);
      gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-     
+     gameFrame.setResizable(false);
      
       JPanel gamePanel=new JPanel();
       gamePanel.setLayout(null);
       gamePanel.setBounds(0,70, tileWidth*width, tileHeigth*heigth);
       gamePanel.setBackground(new java.awt.Color(211, 234, 245));
-     
+      
       
       JPanel stats=new JPanel();
       stats.setLayout(null);
       stats.setBounds(0,0, tileWidth*width , 70);
       stats.setBackground(new java.awt.Color(130, 177, 201));
-      // gameFrame.add(stats);
-     // stats.setSize(tileWidth*width,100);
-     // gamePanel.setSize(tileWidth*width,tileHeigth*heigth);
       gameFrame.add(stats);
       gameFrame.add(gamePanel); 
-     
+      
+      
+    
+       
      
        flags=bombCount;
        boolean gameLost=false;
        boolean gameWon=false;
-       
-       
       
+       GridLayout grd = new GridLayout (20,20);
+       gamePanel.setLayout(grd);
+     
+        for (int i = 0; i < 90; i++) {
+            Button btn = new Button ();
+            gamePanel.add(btn);
+            
+        }
+       
+       
+       
+       
+       
        gameFrame.setVisible(true);
       
 }
 
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+ 
     
     
     
