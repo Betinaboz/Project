@@ -5,8 +5,10 @@
 package javaapplication16;
 
 import java.awt.Button;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -17,16 +19,30 @@ import javax.swing.*;
  * @author Blagovesta
  */
 public class Game implements ActionListener{
-    final int tileHeigth=20;
-    final int tileWidth=20;
+    private static int tileHeigth; 
+    private static int tileWidth;
     private static int width;
     private static int heigth;
     private static int bombCount;
     private static int flags;
     public int timeX = 300;
     public int timeY = 60;
-    
-    
+    private static JFrame gameFrame=new JFrame();
+    private static JPanel gamePanel=new JPanel();
+    private static JPanel stats=new JPanel();
+    private static JLabel flagsLeft;
+    private static JLabel flag;
+    ImageIcon flagImageIcon=null;
+    ImageIcon blankImageIcon=null;
+    ImageIcon mineImageIcon=null;
+    ImageIcon oneImageIcon=null;
+    ImageIcon twoImageIcon=null;
+    ImageIcon threeImageIcon=null;
+    ImageIcon fourImageIcon=null;
+    ImageIcon fiveImageIcon=null;
+    ImageIcon sixImageIcon=null;
+    ImageIcon sevenImageIcon=null;
+    ImageIcon eigthImageIcon=null;
     
     
     
@@ -62,65 +78,93 @@ public class Game implements ActionListener{
         
         switch (new Menu().getWhichLevel()){
             case 1: 
-                heigth=20;
-                width=20;
+                heigth=10;
+                width=10;
                 bombCount=10;
+                tileHeigth=70;
+                tileWidth=70;
                 break;
             case 2:
-                heigth=25;
-                width=25;
+                heigth=15;
+                width=15;
                 bombCount=15;
+                tileHeigth=50;
+                tileWidth=50;
                 break;
             case 3:
-                heigth=30;
-                width=30;
+                heigth=20;
+                width=20;
                 bombCount=20;
+                tileHeigth=40;
+                tileWidth=40;
                 break;
         }
     }
     
+     public void loadImages(){
+        flagImageIcon=getScaledImage("javaapplication16.images/flag.png");
+        blankImageIcon=getScaledImage("javaapplication16.images/blank.png");
+        mineImageIcon=getScaledImage("javaapplication16.images/mine.png");
+        oneImageIcon=getScaledImage("javaapplication16.images/1.png");
+        twoImageIcon=getScaledImage("javaapplication16.images/2.png");
+        threeImageIcon=getScaledImage("javaapplication16.images/3.png");
+        fourImageIcon=getScaledImage("javaapplication16.images/4.png");
+        fiveImageIcon=getScaledImage("javaapplication16.images/5.png");
+        sixImageIcon=getScaledImage("javaapplication16.images/6.png");
+        sevenImageIcon=getScaledImage("javaapplication16.images/7.png");
+        eigthImageIcon=getScaledImage("javaapplication16.images/8.png");
+    }
     
     public void setupGame() {
         
       setLevel();
-     JFrame gameFrame=new JFrame();
+     gameFrame=new JFrame();
      gameFrame.setSize(tileWidth*width,(tileHeigth*heigth)+70);
      gameFrame.setLayout(null);
      gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      gameFrame.setResizable(false);
      
-      JPanel gamePanel=new JPanel();
-      gamePanel.setLayout(null);
+      gamePanel=new JPanel();
       gamePanel.setBounds(0,70, tileWidth*width, tileHeigth*heigth);
       gamePanel.setBackground(new java.awt.Color(211, 234, 245));
       
       
-      JPanel stats=new JPanel();
+      stats=new JPanel();
       stats.setLayout(null);
       stats.setBounds(0,0, tileWidth*width , 70);
       stats.setBackground(new java.awt.Color(130, 177, 201));
       gameFrame.add(stats);
       gameFrame.add(gamePanel); 
       
-      
-    
-       
-     
-       flags=bombCount;
+      flags=bombCount;
        boolean gameLost=false;
        boolean gameWon=false;
-      
-       GridLayout grd = new GridLayout (20,20);
+
+       GridLayout grd = new GridLayout (width,heigth);
        gamePanel.setLayout(grd);
      
-        for (int i = 0; i < 90; i++) {
-            Button btn = new Button ();
-            gamePanel.add(btn);
+       JButton[][] buttons = new JButton[heigth][width];  
+       
+        for (int i = 0; i <heigth; i++) {
+            for(int j=0; j<width;j++){
+               // buttons[i][j].setPreferredSize(new Dimension(tileWidth, tileHeigth));
+                buttons[i][j]=new JButton("");
+                gamePanel.add(buttons[i][j]);
+            }
             
         }
        
        
-       
+        //shte se promenq
+      flagsLeft=new JLabel(Integer.toString(flags));
+      flagsLeft.setBounds(20, 20, 60, 25);
+      flagsLeft.setFont(new Font("Courier New", Font.PLAIN, 18));
+      stats.add(flagsLeft);
+      
+      flag=new JLabel ("flags");
+      flag.setBounds(50,20,60,25);
+      flag.setFont(new Font("Courier New", Font.PLAIN, 18));
+      stats.add(flag);
        
        
        gameFrame.setVisible(true);
@@ -129,7 +173,13 @@ public class Game implements ActionListener{
 
     
     
- 
+      public ImageIcon getScaledImage(String imageString){
+          ImageIcon imageIcon=new ImageIcon(imageString);
+          Image image=imageIcon.getImage();
+          Image newImage=image.getScaledInstance(tileWidth,tileHeigth,java.awt.Image.SCALE_SMOOTH);
+          imageIcon=new ImageIcon(newImage);
+          return imageIcon;
+      }
     
     
     
