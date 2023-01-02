@@ -155,6 +155,56 @@ public class Game implements ActionListener{
              }
          }
          
+         int adjacent=0;
+         
+          for (int i = 0; i < width; i++) {
+                     for (int j = 0; j < heigth; j++) {
+                           adjacent = 0;
+ 
+                           if (intButtArray[i][j] != 9) {
+                                  if (i > 0 && j > 0) {
+                                         if (intButtArray[i - 1][j - 1] == 9)
+                                                adjacent++;
+                                  }
+ 
+                                  if (i > 0) {
+                                         if (intButtArray[i - 1][j] == 9)
+                                                adjacent++;
+                                  }
+ 
+                                  if (i > 0 && j < heigth - 1) {
+                                         if (intButtArray[i - 1][j + 1] == 9)
+                                                adjacent++;
+                                  }
+ 
+                                  if (i < width - 1 && j > 0) {
+                                         if (intButtArray[i + 1][j - 1] == 9)
+                                                adjacent++;
+                                  }
+                                  if (i < width - 1) {
+                                         if (intButtArray[i + 1][j] == 9)
+                                                adjacent++;
+                                  }
+ 
+                                  if (i < width - 1 && j < heigth - 1) {
+                                         if (intButtArray[i + 1][j + 1] == 9)
+                                                adjacent++;
+                                  }
+ 
+                                  if (j > 0) {
+                                         if (intButtArray[i][j - 1] == 9)
+                                                adjacent++;
+                                  }
+                                  if (j < heigth - 1) {
+                                         if (intButtArray[i][j + 1] == 9)
+                                                adjacent++;
+                                  }
+                                  intButtArray[i][j] = adjacent;
+                           }
+                     }
+              }
+         
+         
      }
      
     
@@ -185,8 +235,6 @@ public class Game implements ActionListener{
 
        GridLayout grd = new GridLayout (width,heigth);
        gamePanel.setLayout(grd);
-     
-       JButton[][] buttons = new JButton[heigth][width];  
        
         for (int i =0; i <heigth; i++) {
             for(int j=0; j<width;j++){
