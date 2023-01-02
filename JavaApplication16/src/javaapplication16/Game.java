@@ -11,6 +11,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 import javax.swing.*;
 
 
@@ -25,13 +26,13 @@ public class Game implements ActionListener{
     private static int heigth;
     private static int bombCount;
     private static int flags;
-    public int timeX = 300;
-    public int timeY = 60;
     private static JFrame gameFrame=new JFrame();
     private static JPanel gamePanel=new JPanel();
     private static JPanel stats=new JPanel();
     private static JLabel flagsLeft;
     private static JLabel flag;
+    private static int [][] intButtArray;
+    private static JButton[][] buttons = new JButton[heigth][width];  
     ImageIcon flagImageIcon=null;
     ImageIcon blankImageIcon=null;
     ImageIcon mineImageIcon=null;
@@ -102,7 +103,7 @@ public class Game implements ActionListener{
     }
     
      public void loadImages(){
-        flagImageIcon=getScaledImage("javaapplication16.images/flag.png");
+        flagImageIcon=getScaledImage("C:\\images\\flag.png");
         blankImageIcon=getScaledImage("javaapplication16.images/blank.png");
         mineImageIcon=getScaledImage("javaapplication16.images/mine.png");
         oneImageIcon=getScaledImage("javaapplication16.images/1.png");
@@ -114,6 +115,48 @@ public class Game implements ActionListener{
         sevenImageIcon=getScaledImage("javaapplication16.images/7.png");
         eigthImageIcon=getScaledImage("javaapplication16.images/8.png");
     }
+     
+     public int[] randomBombs(int width, int heigth, int bombs){
+         Random rand=new Random();
+         int rndmines[]=new int [bombs];
+         int rndNo;
+         boolean generated=false;
+         int count=0;
+         while(count<bombs){
+             rndNo=(int)((width*heigth)*(rand.nextDouble()))+1;
+             for (int i=0;i<count;i++){
+                 if(rndmines[i]==rndNo){
+                     generated=true;
+                     do {
+                         rndNo=(int)((width*heigth)*(rand.nextDouble()))+1;
+                     }while (rndmines[i]==rndNo);
+                     rndmines[count++]=rndNo;
+                 }
+                 if (!generated){
+                     rndmines[count++]=rndNo;
+                 }
+             }
+         }
+         return rndmines;
+         
+     }
+     
+     public void minesFormat(JButton buton[][]){
+         int mine[]=randomBombs(width, heigth, bombCount);
+         int count=1;
+         for(int i=0;i<width;i++){
+             for(int j=0; j<heigth;j++){
+                 for (int k=0;k<mine.length;k++){
+                     if (count==mine[k]){
+                         intButtArray[i][j]=9; //mina
+                     }
+                 }
+                 count++;
+             }
+         }
+         
+     }
+     
     
     public void setupGame() {
         
@@ -145,9 +188,9 @@ public class Game implements ActionListener{
      
        JButton[][] buttons = new JButton[heigth][width];  
        
-        for (int i = 0; i <heigth; i++) {
+        for (int i =0; i <heigth; i++) {
             for(int j=0; j<width;j++){
-               // buttons[i][j].setPreferredSize(new Dimension(tileWidth, tileHeigth));
+               buttons[i][j].setSize(tileWidth, tileHeigth);
                 buttons[i][j]=new JButton("");
                 gamePanel.add(buttons[i][j]);
             }
