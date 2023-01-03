@@ -212,7 +212,7 @@ public class Game implements ActionListener{
         
       setLevel();
      gameFrame=new JFrame();
-     gameFrame.setSize(tileWidth*width,(tileHeigth*heigth)+70);
+     gameFrame.setSize((tileWidth*width)+15,(tileHeigth*heigth)+109);
      gameFrame.setLayout(null);
      gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      gameFrame.setResizable(false);
