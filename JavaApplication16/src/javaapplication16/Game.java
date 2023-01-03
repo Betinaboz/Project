@@ -32,7 +32,7 @@ public class Game implements ActionListener{
     private static JLabel flagsLeft;
     private static JLabel flag;
     private static int [][] intButtArray;
-    private static JButton[][] buttons = new JButton[heigth][width];  
+    private JButton[][] buttons;  
     ImageIcon flagImageIcon=null;
     ImageIcon blankImageIcon=null;
     ImageIcon mineImageIcon=null;
@@ -235,11 +235,11 @@ public class Game implements ActionListener{
 
        GridLayout grd = new GridLayout (width,heigth);
        gamePanel.setLayout(grd);
+       buttons=new JButton[width][heigth];
        
         for (int i =0; i <heigth; i++) {
             for(int j=0; j<width;j++){
-               buttons[i][j].setSize(tileWidth, tileHeigth);
-                buttons[i][j]=new JButton("");
+               buttons[i][j]=new JButton("");
                 gamePanel.add(buttons[i][j]);
             }
             
