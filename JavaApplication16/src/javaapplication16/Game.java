@@ -103,17 +103,17 @@ public class Game implements ActionListener{
     }
     
      public void loadImages(){
-        flagImageIcon=getScaledImage("C:\\images\\flag.png");
-        blankImageIcon=getScaledImage("javaapplication16.images/blank.png");
-        mineImageIcon=getScaledImage("javaapplication16.images/mine.png");
-        oneImageIcon=getScaledImage("javaapplication16.images/1.png");
-        twoImageIcon=getScaledImage("javaapplication16.images/2.png");
-        threeImageIcon=getScaledImage("javaapplication16.images/3.png");
-        fourImageIcon=getScaledImage("javaapplication16.images/4.png");
-        fiveImageIcon=getScaledImage("javaapplication16.images/5.png");
-        sixImageIcon=getScaledImage("javaapplication16.images/6.png");
-        sevenImageIcon=getScaledImage("javaapplication16.images/7.png");
-        eigthImageIcon=getScaledImage("javaapplication16.images/8.png");
+        flagImageIcon=getScaledImage("src\\image\\flag.png");
+        blankImageIcon=getScaledImage("src\\image\\blank.png");
+        mineImageIcon=getScaledImage("src\\image\\mine.png");
+        oneImageIcon=getScaledImage("src\\image\\1.png");
+        twoImageIcon=getScaledImage("src\\image\\2.png");
+        threeImageIcon=getScaledImage("src\\image\\3.png");
+        fourImageIcon=getScaledImage("src\\image\\4.png");
+        fiveImageIcon=getScaledImage("src\\image\\5.png");
+        sixImageIcon=getScaledImage("src\\image\\6.png");
+        sevenImageIcon=getScaledImage("src\\image\\7.png");
+        eigthImageIcon=getScaledImage("src\\image\\8.png");
     }
      
      public int[] randomBombs(int width, int heigth, int bombs){
@@ -207,6 +207,35 @@ public class Game implements ActionListener{
          
      }
      
+     public void attachImg(){
+         loadImages();
+         for(int i=0;i<width;i++){
+             for(int j=0;j<heigth;j++){
+                 if(intButtArray[i][j]==9)
+                     buttons[i][j].setIcon(mineImageIcon);
+                 if(intButtArray[i][j]==0)
+                     buttons[i][j].setIcon(blankImageIcon);
+                 if(intButtArray[i][j]==1)
+                     buttons[i][j].setIcon(oneImageIcon);
+                  if(intButtArray[i][j]==2)
+                     buttons[i][j].setIcon(twoImageIcon);
+                  if(intButtArray[i][j]==3)
+                     buttons[i][j].setIcon(threeImageIcon);
+                  if(intButtArray[i][j]==4)
+                     buttons[i][j].setIcon(fourImageIcon);
+                  if(intButtArray[i][j]==5)
+                     buttons[i][j].setIcon(fiveImageIcon);
+                  if(intButtArray[i][j]==6)
+                     buttons[i][j].setIcon(sixImageIcon);
+                  if(intButtArray[i][j]==7)
+                     buttons[i][j].setIcon(sevenImageIcon);
+                  if(intButtArray[i][j]==8)
+                     buttons[i][j].setIcon(eigthImageIcon);
+                 
+             }
+         }
+     }
+     
     
     public void setupGame() {
         
@@ -230,8 +259,7 @@ public class Game implements ActionListener{
       gameFrame.add(gamePanel); 
       
       flags=bombCount;
-       boolean gameLost=false;
-       boolean gameWon=false;
+
 
        GridLayout grd = new GridLayout (width,heigth);
        gamePanel.setLayout(grd);
@@ -244,7 +272,9 @@ public class Game implements ActionListener{
             }
             
         }
-       
+        
+        minesFormat(buttons);
+        attachImg();
        
         //shte se promenq
       flagsLeft=new JLabel(Integer.toString(flags));

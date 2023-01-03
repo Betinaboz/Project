@@ -53,6 +53,17 @@ public class Menu implements ActionListener{
         return whichLevel;
     }
     
+    public Menu(int whichLevel){
+        setWhichLevel(whichLevel);
+    }
+    
+    public Menu(){
+        whichLevel=1;
+    }
+    
+    public Menu(Menu obj){
+        whichLevel=obj.whichLevel;
+    }
 
     public void setup() {
      Exitbutton b = new Exitbutton();
@@ -121,6 +132,10 @@ public class Menu implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    public String toString(){
+        return String.format("%d",getWhichLevel());
     }
 
    
