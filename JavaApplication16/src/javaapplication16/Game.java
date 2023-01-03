@@ -124,18 +124,19 @@ public class Game implements ActionListener{
          int count=0;
          while(count<bombs){
              rndNo=(int)((width*heigth)*(rand.nextDouble()))+1;
-             for (int i=0;i<count;i++){
+              for (int i=0;i<count;i++){
                  if(rndmines[i]==rndNo){
                      generated=true;
-                     do {
+                    do {
                          rndNo=(int)((width*heigth)*(rand.nextDouble()))+1;
                      }while (rndmines[i]==rndNo);
-                     rndmines[count++]=rndNo;
+                     rndmines[count++]=rndNo; 
                  }
+               }
                  if (!generated){
                      rndmines[count++]=rndNo;
                  }
-             }
+             
          }
          return rndmines;
          
@@ -207,7 +208,7 @@ public class Game implements ActionListener{
          
      }
      
-     public void attachImg(){
+     /*public void attachImg(){
          loadImages();
          for(int i=0;i<width;i++){
              for(int j=0;j<heigth;j++){
@@ -234,7 +235,7 @@ public class Game implements ActionListener{
                  
              }
          }
-     }
+     } */
      
     
     public void setupGame() {
@@ -273,8 +274,8 @@ public class Game implements ActionListener{
             
         }
         
-        minesFormat(buttons);
-        attachImg();
+       minesFormat(buttons);
+      //  attachImg();
        
         //shte se promenq
       flagsLeft=new JLabel(Integer.toString(flags));
