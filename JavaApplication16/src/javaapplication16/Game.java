@@ -31,7 +31,7 @@ public class Game implements ActionListener{
     private static JPanel stats=new JPanel();
     private static JLabel flagsLeft;
     private static JLabel flag;
-    private static int [][] intButtArray= new int [width][heigth];
+    private int [][] intButtArray;//= new int [width][heigth];
     private JButton[][] buttons;  
     ImageIcon flagImageIcon=null;
     ImageIcon blankImageIcon=null;
@@ -127,18 +127,17 @@ public class Game implements ActionListener{
               for (int i=0;i<count;i++){
                  if(rndmines[i]==rndNo){
                      generated=true;
-                    
                     do {
                          rndNo=rand.nextInt(width*heigth);
                      }while (rndmines[i]==rndNo);
                      rndmines[count]=rndNo; 
-                     count ++;
-                 }
+                     }
                }
                  if (!generated){
                      rndmines[count]=rndNo;
-                     count ++;
+                    
                  }
+                 count++;
              
          }  return rndmines;
      }
@@ -146,20 +145,25 @@ public class Game implements ActionListener{
      
      
       public void minesFormat(JButton buton[][]){
-         setLevel();
+        setLevel();
+        intButtArray=new int[width][heigth];
+         for(int i=0;i<width;i++){
+             for(int j=0; j<heigth;j++){
+                 intButtArray[i][j]=0;
+             }
+         }
          int mine[]=randomBombs(width, heigth, bombCount);
          int count=0;
          for(int i=0;i<width;i++){
              for(int j=0; j<heigth;j++){
-                 
                  for (int k=0;k<mine.length;k++){
                      if (count==mine[k]){
                          intButtArray[i][j]=9; //mina
                          
                      }
-                   count++;  
+                     
                  }
-                 
+                 count++;
              }
          }
          
@@ -214,8 +218,17 @@ public class Game implements ActionListener{
          
          
      }
+      public void proba(){
+          minesFormat(buttons);
+          for(int i=0;i<width;i++){
+              for(int j=0;j<heigth;j++){
+                  System.out.print(intButtArray[i][j]);
+              }
+              System.out.println();
+          }
+      }
      
-     /*public void attachImg(){
+    public void attachImg(){
          loadImages();
          for(int i=0;i<width;i++){
              for(int j=0;j<heigth;j++){
@@ -242,7 +255,7 @@ public class Game implements ActionListener{
                  
              }
          }
-     } */
+     } 
      
     
     public void setupGame() {
@@ -281,6 +294,7 @@ public class Game implements ActionListener{
             
         }
          minesFormat(buttons);
+         proba();
       //  attachImg();
        
         //shte se promenq
