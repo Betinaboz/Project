@@ -31,7 +31,7 @@ public class Game implements ActionListener{
     private static JPanel stats=new JPanel();
     private static JLabel flagsLeft;
     private static JLabel flag;
-    private static int [][] intButtArray;
+    private static int [][] intButtArray= new int [width][heigth];
     private JButton[][] buttons;  
     ImageIcon flagImageIcon=null;
     ImageIcon blankImageIcon=null;
@@ -123,40 +123,47 @@ public class Game implements ActionListener{
          boolean generated=false;
          int count=0;
          while(count<bombs){
-             rndNo=(int)((width*heigth)*(rand.nextDouble()))+1;
+             rndNo=rand.nextInt(width*heigth);
               for (int i=0;i<count;i++){
                  if(rndmines[i]==rndNo){
                      generated=true;
+                    
                     do {
-                         rndNo=(int)((width*heigth)*(rand.nextDouble()))+1;
+                         rndNo=rand.nextInt(width*heigth);
                      }while (rndmines[i]==rndNo);
-                     rndmines[count++]=rndNo; 
+                     rndmines[count]=rndNo; 
+                     count ++;
                  }
                }
                  if (!generated){
-                     rndmines[count++]=rndNo;
+                     rndmines[count]=rndNo;
+                     count ++;
                  }
              
-         }
-         return rndmines;
-         
+         }  return rndmines;
      }
      
-     public void minesFormat(JButton buton[][]){
+     
+     
+      public void minesFormat(JButton buton[][]){
+         setLevel();
          int mine[]=randomBombs(width, heigth, bombCount);
-         int count=1;
+         int count=0;
          for(int i=0;i<width;i++){
              for(int j=0; j<heigth;j++){
+                 
                  for (int k=0;k<mine.length;k++){
                      if (count==mine[k]){
                          intButtArray[i][j]=9; //mina
+                         
                      }
+                   count++;  
                  }
-                 count++;
+                 
              }
          }
          
-         int adjacent=0;
+         int adjacent;
          
           for (int i = 0; i < width; i++) {
                      for (int j = 0; j < heigth; j++) {
@@ -273,8 +280,7 @@ public class Game implements ActionListener{
             }
             
         }
-        
-       minesFormat(buttons);
+         minesFormat(buttons);
       //  attachImg();
        
         //shte se promenq
