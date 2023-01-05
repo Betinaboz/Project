@@ -75,6 +75,43 @@ public class Game implements ActionListener{
         return bombCount;
     }
     
+    
+    public void setArray (int array [][]){
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < heigth; j++) {
+                array[i][j] = intButtArray [i][j];
+            }
+        }
+    }
+    
+    public int getArray (){
+         for (int i = 0; i < width; i++) {
+            for (int j = 0; j < heigth; j++) {
+                return intButtArray [i][j];
+            }
+        }
+         return 0;
+    }
+    
+    
+    public void setButtons (JButton buttonsArray [][]){
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < heigth; j++) {
+                buttonsArray[i][j] = buttons [i][j];
+    }
+        }
+    }
+    
+    public int getButtons (){
+         for (int i = 0; i < width; i++) {
+            for (int j = 0; j < heigth; j++) {
+               // return  buttons [i][j];
+            }
+        }
+         return 0;
+    }
+    
+    
     public void setLevel(){
         
         switch (new Menu().getWhichLevel()){
@@ -150,8 +187,15 @@ public class Game implements ActionListener{
          for(int i=0;i<width;i++){
              for(int j=0; j<heigth;j++){
                  intButtArray[i][j]=0;
+                // intButtArray.addActionListener(new Game ()); 
              }
          }
+      
+           
+                     
+                 
+             
+         
          int mine[]=randomBombs(width, heigth, bombCount);
          int count=0;
          for(int i=0;i<width;i++){
@@ -215,10 +259,14 @@ public class Game implements ActionListener{
                            }
                      }
               }
+      }
          
          
-     }
-      public void proba(){
+     
+ 
+
+
+      public void  proba(){
           minesFormat(buttons);
           for(int i=0;i<width;i++){
               for(int j=0;j<heigth;j++){
@@ -256,6 +304,9 @@ public class Game implements ActionListener{
              }
          }
      } 
+    
+    
+    
      
     
     public void setupGame() {
@@ -295,7 +346,7 @@ public class Game implements ActionListener{
         }
          minesFormat(buttons);
          proba();
-      //  attachImg();
+          //attachImg();
        
         //shte se promenq
       flagsLeft=new JLabel(Integer.toString(flags));
@@ -327,6 +378,7 @@ public class Game implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Worked");
+        attachImg();
     }
 }
