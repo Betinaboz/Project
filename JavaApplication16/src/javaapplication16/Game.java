@@ -102,13 +102,13 @@ public class Game implements ActionListener{
         }
     }
     
-    public int getButtons (){
+    public JButton getButtons (){
          for (int i = 0; i < width; i++) {
             for (int j = 0; j < heigth; j++) {
-               // return  buttons [i][j];
+                return  buttons [i][j];
             }
         }
-         return 0;
+      return null;   
     }
     
     
@@ -187,7 +187,6 @@ public class Game implements ActionListener{
          for(int i=0;i<width;i++){
              for(int j=0; j<heigth;j++){
                  intButtArray[i][j]=0;
-                // intButtArray.addActionListener(new Game ()); 
              }
          }
       
@@ -310,7 +309,7 @@ public class Game implements ActionListener{
      
     
     public void setupGame() {
-        
+      revealButtons r = new revealButtons();
       setLevel();
      gameFrame=new JFrame();
      gameFrame.setSize((tileWidth*width)+15,(tileHeigth*heigth)+109);
@@ -347,6 +346,7 @@ public class Game implements ActionListener{
          minesFormat(buttons);
          proba();
           //attachImg();
+          gamePanel.add(r.setupReveal());
        
         //shte se promenq
       flagsLeft=new JLabel(Integer.toString(flags));
@@ -378,7 +378,6 @@ public class Game implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Worked");
-        attachImg();
+        
     }
 }
