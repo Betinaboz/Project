@@ -19,13 +19,16 @@ import javax.swing.*;
  *
  * @author Blagovesta
  */
-public class Game implements ActionListener{
+public class Game implements ActionListener {
     private static int tileHeigth; 
     private static int tileWidth;
     private static int width;
     private static int heigth;
     private static int bombCount;
     private static int flags;
+    private static boolean gameLost = false;
+    private static boolean gameWon = false;
+    private static JLayeredPane gamePane = new JLayeredPane();
     private static JFrame gameFrame=new JFrame();
     private static JPanel gamePanel=new JPanel();
     private static JPanel stats=new JPanel();
@@ -111,6 +114,44 @@ public class Game implements ActionListener{
       return null;   
     }
     
+    public void setTileWidth(int tileWidth){
+        if (tileWidth>0)
+            this.tileWidth=tileWidth;
+    }
+    
+    public int getTileWidth(){
+        return tileWidth;
+    }
+    
+    public void setTileHeigth(int tileHeigth){
+        if (tileHeigth>0)
+            this.tileHeigth=tileHeigth;
+    }
+    
+    public int getTileHeigth(){
+        return tileHeigth;
+    }
+    
+    
+    public void setFlag(int flags){
+        if (flags>=0){
+            this.flags=flags;
+        }
+    }
+
+    public int getFlag(){
+        return flags;
+    }
+    
+       public JLabel getFlagsLeft(){
+        return flagsLeft;
+    }
+        public void setFlagsLeft(JLabel flagsLeft){
+        if (flagsLeft!=null){
+            this.flagsLeft=flagsLeft;
+        }
+    }
+    
     
     public void setLevel(){
         
@@ -160,14 +201,12 @@ public class Game implements ActionListener{
          boolean generated=false;
          int count=0;
          while(count<bombs){
+             generated=false;
              rndNo=rand.nextInt(width*heigth);
               for (int i=0;i<count;i++){
                  if(rndmines[i]==rndNo){
                      generated=true;
-                    do {
-                         rndNo=rand.nextInt(width*heigth);
-                     }while (rndmines[i]==rndNo);
-                     rndmines[count]=rndNo; 
+                    count --;
                      }
                }
                  if (!generated){
@@ -274,6 +313,11 @@ public class Game implements ActionListener{
               System.out.println();
           }
       }
+      
+      
+      
+      
+      
      
     public void attachImg(){
          loadImages();
@@ -309,8 +353,10 @@ public class Game implements ActionListener{
      
     
     public void setupGame() {
-      revealButtons r = new revealButtons();
+      
       setLevel();
+     Flags flabel = new Flags();
+   
      gameFrame=new JFrame();
      gameFrame.setSize((tileWidth*width)+15,(tileHeigth*heigth)+109);
      gameFrame.setLayout(null);
@@ -320,7 +366,7 @@ public class Game implements ActionListener{
       gamePanel=new JPanel();
       gamePanel.setBounds(0,70, tileWidth*width, tileHeigth*heigth);
       gamePanel.setBackground(new java.awt.Color(211, 234, 245));
-      
+   
       
       stats=new JPanel();
       stats.setLayout(null);
@@ -340,16 +386,20 @@ public class Game implements ActionListener{
             for(int j=0; j<width;j++){
                buttons[i][j]=new JButton("");
                 gamePanel.add(buttons[i][j]);
+                buttons[i][j].addActionListener(this);
+                buttons[i][j].setBackground(new java.awt.Color(208, 224, 242));
+
+                
             }
             
         }
          minesFormat(buttons);
          proba();
-          //attachImg();
-          gamePanel.add(r.setupReveal());
-       
-        //shte se promenq
-      flagsLeft=new JLabel(Integer.toString(flags));
+         flabel.flagLabel();
+        
+         
+         
+      flagsLeft=new JLabel();
       flagsLeft.setBounds(20, 20, 60, 25);
       flagsLeft.setFont(new Font("Courier New", Font.PLAIN, 18));
       stats.add(flagsLeft);
@@ -361,7 +411,11 @@ public class Game implements ActionListener{
        
        
        gameFrame.setVisible(true);
+       
       
+}  public void gameLost(){
+    if (gameLost)
+    JOptionPane.showMessageDialog(null, "Moje bi budi po-dobur");
 }
 
     
@@ -377,7 +431,51 @@ public class Game implements ActionListener{
     
     
     @Override
-    public void actionPerformed(ActionEvent e) {
+     public void actionPerformed(ActionEvent e) {
+        loadImages();
         
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < heigth; j++) {
+         if (buttons[i][j] == e.getSource()) {
+                                         if (intButtArray[i][j] == 9)
+                                             
+                                    {   
+                                         buttons[i][j].setIcon(mineImageIcon);
+                                             for (int k = 0; k < width; k++) {
+                                                       for (int l = 0; l < heigth; l++){
+                                                          if (intButtArray[k][l] == 9)
+                                                              buttons[k][l].setIcon(mineImageIcon);
+                                             
+                                                           buttons[k][l].removeActionListener(this);
+                                                           gameLost= true; 
+                                                       }
+                                                     
+                                             } 
+                                             gameLost(); 
+                                         }
+                                         if (intButtArray[i][j] == 0){    
+                                         buttons[i][j].setIcon(blankImageIcon);          
     }
+                                          if (intButtArray[i][j] == 1) {
+                                                buttons[i][j].setIcon(oneImageIcon);
+                                         }
+                                         if (intButtArray[i][j] == 2) {
+                                                buttons[i][j].setIcon(twoImageIcon);
+                                         }
+                                         if (intButtArray[i][j] == 3) {
+                                                buttons[i][j].setIcon(threeImageIcon);
+                                         }
+                                         if (intButtArray[i][j] == 4) {
+                                                buttons[i][j].setIcon(fourImageIcon);
+                                         }
+                                         if (intButtArray[i][j] == 5) {
+                                                buttons[i][j].setIcon(fiveImageIcon);
+                                         }
+        } 
 }
+}
+         }   
+            }
+  
+ 
+

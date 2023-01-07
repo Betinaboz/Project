@@ -52,18 +52,7 @@ public class Menu implements ActionListener{
     public int getWhichLevel(){
         return whichLevel;
     }
-    
-    public Menu(int whichLevel){
-        setWhichLevel(whichLevel);
-    }
-    
-    public Menu(){
-        whichLevel=1;
-    }
-    
-    public Menu(Menu obj){
-        whichLevel=obj.whichLevel;
-    }
+   
 
     public void setup() {
      Exitbutton b = new Exitbutton();
