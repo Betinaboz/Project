@@ -376,21 +376,43 @@ public class Game implements ActionListener, MouseListener {
          minesFormat(buttons);
          proba();
          
-         
-         
+        
          
       flag=new JLabel (" flags");
       flag.setBounds(50,20,100,25);
       flag.setFont(new Font("Courier New", Font.PLAIN, 18));
       stats.add(flag);
-       
-       
+   
        gameFrame.setVisible(true);
        
+       
       
-}  public void gameLost(){
+}  
+    public void win(){
+        int count=0;
+        for(int i=0;i<width;i++){
+            for(int j=0; j<heigth; j++){
+                if (buttons[i][j].getIcon()!=null || intButtArray[i][j]==0){
+                    count++;
+                }
+            }
+        }
+        if((count==width*heigth)&&flags==0){
+            gameWon=true;
+            
+        }
+    }
+    
+    public void gameWon(){
+        win();
+        if (gameWon)
+    JOptionPane.showMessageDialog(null, "Congrats!");
+    }
+    
+    
+    public void gameLost(){
     if (gameLost)
-    JOptionPane.showMessageDialog(null, "Moje bi budi po-dobur");
+    JOptionPane.showMessageDialog(null, "You lost, try again");
 }
 
     
@@ -455,9 +477,13 @@ public class Game implements ActionListener, MouseListener {
                                                 
                                                
                                          }
-        } 
-}
-}
+                                         
+                             }
+         
+         
+              }
+           }
+          gameWon();
          }   
 
     @Override
@@ -477,7 +503,7 @@ public class Game implements ActionListener, MouseListener {
                         if (buttons[i][j] == e.getSource())
                         {
                            
-                            if(buttons[i][j].getIcon()==null&&k==0){
+                            if(buttons[i][j].getIcon()==null){
                                buttons[i][j].setIcon(flagImageIcon);
                                flags--;
                                k=1;
