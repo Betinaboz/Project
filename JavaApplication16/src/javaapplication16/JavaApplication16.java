@@ -4,10 +4,6 @@
  */
 package javaapplication16;
 
-/**
- *
- * @author blagovestadb
- */
 public class JavaApplication16 {
 
     

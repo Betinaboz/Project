@@ -28,6 +28,7 @@ public class Game implements ActionListener, MouseListener {
     private static int flags;
     private static boolean gameLost = false;
     private static boolean gameWon = false;
+    private static boolean revealed;
     private static JLayeredPane gamePane = new JLayeredPane();
     private static JFrame gameFrame=new JFrame();
     private static JPanel gamePanel=new JPanel();
@@ -76,24 +77,6 @@ public class Game implements ActionListener, MouseListener {
     
     public int getBombCount(){
         return bombCount;
-    }
-    
-    
-    public void setArray (int array [][]){
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < heigth; j++) {
-                array[i][j] = intButtArray [i][j];
-            }
-        }
-    }
-    
-    public int getArray (){
-         for (int i = 0; i < width; i++) {
-            for (int j = 0; j < heigth; j++) {
-                return intButtArray [i][j];
-            }
-        }
-         return 0;
     }
     
     
@@ -299,12 +282,7 @@ public class Game implements ActionListener, MouseListener {
               }
       }
          
-         
-     
- 
-
-
-      public void  proba(){
+         public void  proba(){
           minesFormat(buttons);
           for(int i=0;i<width;i++){
               for(int j=0;j<heigth;j++){
@@ -313,12 +291,7 @@ public class Game implements ActionListener, MouseListener {
               System.out.println();
           }
       }
-      
-      
-      
-      
-      
-     
+    
     public void attachImg(){
          loadImages();
          for(int i=0;i<width;i++){
@@ -355,8 +328,6 @@ public class Game implements ActionListener, MouseListener {
     public void setupGame() {
       
       setLevel();
-     Flags flabel = new Flags();
-   
      gameFrame=new JFrame();
      gameFrame.setSize((tileWidth*width)+15,(tileHeigth*heigth)+109);
      gameFrame.setLayout(null);
@@ -381,7 +352,7 @@ public class Game implements ActionListener, MouseListener {
       stats.setBackground(new java.awt.Color(130, 177, 201));
       gameFrame.add(stats);
       gameFrame.add(gamePanel); 
-      
+       stats.add(flagsLeft);
      
 
 
@@ -396,6 +367,7 @@ public class Game implements ActionListener, MouseListener {
                 buttons[i][j].addActionListener(this);
                 buttons[i][j].addMouseListener(this); 
                 buttons[i][j].setBackground(new java.awt.Color(208, 224, 242));
+             
 
                 
             }
@@ -403,18 +375,12 @@ public class Game implements ActionListener, MouseListener {
         }
          minesFormat(buttons);
          proba();
-         //flabel.flagLabel();
-         
-        
          
          
-      flagsLeft=new JLabel();
-      flagsLeft.setBounds(20, 20, 60, 25);
-      flagsLeft.setFont(new Font("Courier New", Font.PLAIN, 18));
-      stats.add(flagsLeft);
-      
-      flag=new JLabel ("flags");
-      flag.setBounds(50,20,60,25);
+         
+         
+      flag=new JLabel (" flags");
+      flag.setBounds(50,20,100,25);
       flag.setFont(new Font("Courier New", Font.PLAIN, 18));
       stats.add(flag);
        
@@ -463,24 +429,30 @@ public class Game implements ActionListener, MouseListener {
                                              } 
                                              gameLost(); 
                                          }
-                                         if (intButtArray[i][j] == 0){    
+                                         if (intButtArray[i][j] == 0 && buttons[i][j].getIcon()==null){    
                                          buttons[i][j].setIcon(blankImageIcon); 
-    }
-                                          if (intButtArray[i][j] == 1) {
+                                     
+                                          }
+                                          if (intButtArray[i][j] == 1 && buttons[i][j].getIcon()==null) {
                                                 buttons[i][j].setIcon(oneImageIcon);
+                                               
                                                 
                                          }
-                                         if (intButtArray[i][j] == 2) {
+                                         if (intButtArray[i][j] == 2 && buttons[i][j].getIcon()==null) {
                                                 buttons[i][j].setIcon(twoImageIcon);
+                                                 
                                          }
-                                         if (intButtArray[i][j] == 3) {
+                                         if (intButtArray[i][j] == 3 && buttons[i][j].getIcon()==null) {
                                                 buttons[i][j].setIcon(threeImageIcon);
+                                                
                                          }
-                                         if (intButtArray[i][j] == 4) {
+                                         if (intButtArray[i][j] == 4 && buttons[i][j].getIcon()==null) {
                                                 buttons[i][j].setIcon(fourImageIcon);
+                                                 
                                          }
-                                         if (intButtArray[i][j] == 5) {
+                                         if (intButtArray[i][j] == 5 && buttons[i][j].getIcon()==null) {
                                                 buttons[i][j].setIcon(fiveImageIcon);
+                                                
                                                
                                          }
         } 
@@ -494,22 +466,37 @@ public class Game implements ActionListener, MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
+        loadImages();
+        int k=0;
  if (SwingUtilities.isRightMouseButton(e)){
-              System.out.println("Right Worked");
+              
                 for (int i = 0; i <width ; i++)
                 {
                     for (int j = 0; j < heigth; j++)
                     {
                         if (buttons[i][j] == e.getSource())
-                        {   
+                        {
+                           
+                            if(buttons[i][j].getIcon()==null&&k==0){
                                buttons[i][j].setIcon(flagImageIcon);
                                flags--;
+                               k=1;
+                               
+                            }
+                            if (buttons[i][j].getIcon()==flagImageIcon&&k==0){
+                                buttons[i][j].setIcon(null);
+                                flags++; 
+                               
+                            } 
+                            
                         }
          }
     }
+                
+ }
         
         flagsLeft.setText(Integer.toString(flags));
-         }    }
+         }    
 
     @Override
     public void mouseReleased(MouseEvent e) {
