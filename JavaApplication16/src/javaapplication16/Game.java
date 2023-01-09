@@ -366,7 +366,14 @@ public class Game implements ActionListener, MouseListener {
       gamePanel=new JPanel();
       gamePanel.setBounds(0,70, tileWidth*width, tileHeigth*heigth);
       gamePanel.setBackground(new java.awt.Color(211, 234, 245));
-   
+      
+      
+         flags=bombCount;
+         flagsLeft = new JLabel ("");
+         flagsLeft.setText(Integer.toString(flags));
+         flagsLeft.setBounds(20, 20, 60, 25);
+         flagsLeft.setFont(new Font("Courier New", Font.PLAIN, 18));
+      
       
       stats=new JPanel();
       stats.setLayout(null);
@@ -375,7 +382,7 @@ public class Game implements ActionListener, MouseListener {
       gameFrame.add(stats);
       gameFrame.add(gamePanel); 
       
-      flags=bombCount;
+     
 
 
        GridLayout grd = new GridLayout (width,heigth);
@@ -387,6 +394,7 @@ public class Game implements ActionListener, MouseListener {
                buttons[i][j]=new JButton("");
                 gamePanel.add(buttons[i][j]);
                 buttons[i][j].addActionListener(this);
+                buttons[i][j].addMouseListener(this); 
                 buttons[i][j].setBackground(new java.awt.Color(208, 224, 242));
 
                 
@@ -395,7 +403,7 @@ public class Game implements ActionListener, MouseListener {
         }
          minesFormat(buttons);
          proba();
-         flabel.flagLabel();
+         //flabel.flagLabel();
          
         
          
@@ -446,19 +454,21 @@ public class Game implements ActionListener, MouseListener {
                                                        for (int l = 0; l < heigth; l++){
                                                           if (intButtArray[k][l] == 9)
                                                               buttons[k][l].setIcon(mineImageIcon);
-                                             
+                                                              
                                                            buttons[k][l].removeActionListener(this);
                                                            gameLost= true; 
+                                                           
                                                        }
                                                      
                                              } 
                                              gameLost(); 
                                          }
                                          if (intButtArray[i][j] == 0){    
-                                         buttons[i][j].setIcon(blankImageIcon);          
+                                         buttons[i][j].setIcon(blankImageIcon); 
     }
                                           if (intButtArray[i][j] == 1) {
                                                 buttons[i][j].setIcon(oneImageIcon);
+                                                
                                          }
                                          if (intButtArray[i][j] == 2) {
                                                 buttons[i][j].setIcon(twoImageIcon);
@@ -471,6 +481,7 @@ public class Game implements ActionListener, MouseListener {
                                          }
                                          if (intButtArray[i][j] == 5) {
                                                 buttons[i][j].setIcon(fiveImageIcon);
+                                               
                                          }
         } 
 }
@@ -479,27 +490,39 @@ public class Game implements ActionListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+ if (SwingUtilities.isRightMouseButton(e)){
+              System.out.println("Right Worked");
+                for (int i = 0; i <width ; i++)
+                {
+                    for (int j = 0; j < heigth; j++)
+                    {
+                        if (buttons[i][j] == e.getSource())
+                        {   
+                               buttons[i][j].setIcon(flagImageIcon);
+                               flags--;
+                        }
+         }
     }
+        
+        flagsLeft.setText(Integer.toString(flags));
+         }    }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       
     }
             }
   
