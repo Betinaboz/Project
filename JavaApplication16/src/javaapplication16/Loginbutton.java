@@ -20,6 +20,8 @@ public class Loginbutton implements ActionListener {
     private static JButton button;
     
   
+    
+    
 
     public String getLevel(){
         return level;
@@ -60,15 +62,16 @@ public class Loginbutton implements ActionListener {
        
      if(o.getEasy().isSelected()){
       o.setWhichLevel(1);
-      level ="Easy";
+      setLevel("Easy");
+      
       }
       else if (o.getMedium().isSelected()){
       o.setWhichLevel(2);
-      level ="Medium";
+       setLevel("Medium");
       }
       else if(o.getHard().isSelected()){
           o.setWhichLevel(3);
-          level ="Hard";
+           setLevel("Hard");
       } 
      
        g.setupGame();

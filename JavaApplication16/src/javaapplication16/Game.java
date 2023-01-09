@@ -325,7 +325,7 @@ public class Game implements ActionListener, MouseListener {
      
     
     public void setupGame() {
-      
+      UserFile a=new UserFile();
       setLevel();
      gameFrame=new JFrame();
      gameFrame.setSize((tileWidth*width)+15,(tileHeigth*heigth)+109);
@@ -382,9 +382,11 @@ public class Game implements ActionListener, MouseListener {
       flag.setFont(new Font("Courier New", Font.PLAIN, 18));
       stats.add(flag);
    
+      
+      
        gameFrame.setVisible(true);
        
-       
+       a.write();
       
 }  
     public void win(){
@@ -414,9 +416,13 @@ public class Game implements ActionListener, MouseListener {
     JOptionPane.showMessageDialog(null, "You lost, try again");
 }
     public String gameStatus(){
-        if (gameWon&&!gameLost) return gameStatus = "Game won";
-        else return gameStatus = "Game lost";
-        
+        if (gameWon==true) {
+            setStatus("Game won");
+        } 
+        else if (gameLost==true) {
+              setStatus("Game lost");
+                }
+        return gameStatus;
     }
     
     public void setStatus(String gameStatus){
@@ -550,10 +556,11 @@ public class Game implements ActionListener, MouseListener {
     
     
    
+    @Override
     public String toString (  ){
         Menu menu = new Menu();
         Loginbutton lg = new Loginbutton();
-        return String.format("Name:%s/n Level:%s/n Game status:%s", menu.getUserText().getText(), lg.getLevel() , gameStatus());
+        return String.format("Name:%s  \n Level:%s  \n Game status:%s \n", menu.getUserText().getText(), lg.getLevel() , gameStatus());
     }
     
     
@@ -564,9 +571,9 @@ public class Game implements ActionListener, MouseListener {
         setStatus(status);
     }
 
-    public Game() {//Подразбиране
-        this("    ", "------------------", "  ");
-    }
+   public Game() {//Подразбиране
+        this("    ", " ", "  ");
+    } 
 
     
     

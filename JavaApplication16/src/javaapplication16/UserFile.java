@@ -16,20 +16,20 @@ import java.util.Scanner;
 public class UserFile extends Game {
     
     
-    void writeInFile() throws FileNotFoundException{ 
-         Scanner fileReader=new Scanner(new File ("C:\\file4.txt"));
+    void writeInFile() throws FileNotFoundException{
+        
+         Scanner fileReader=new Scanner(new File ("src\\javaapplication16\\users.txt"));
     
-   File file =new File("C:\\file4.txt");
-    int broi = 1;
-    String txt = " ";
-    while(fileReader.hasNextLine()){
-        txt += broi + fileReader.nextLine()+"\n";
-        broi ++;
-    }
-    fileReader.close();
-   PrintStream pen = new PrintStream ("C:\\file4.txt");
-   pen.println(txt);
-    pen.close();
+        String txt =super.toString();
+        while(fileReader.hasNextLine()){
+         txt+=fileReader.nextLine()+"\n";
+        }
+      
+   
+     fileReader.close();
+     PrintStream pen = new PrintStream ("src\\javaapplication16\\users.txt");
+     pen.println(txt);
+     pen.close();
      
 }
     
@@ -41,17 +41,4 @@ public class UserFile extends Game {
             System.out.println(f.getMessage());
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-}
+  }

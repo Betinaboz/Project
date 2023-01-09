@@ -4,12 +4,14 @@
  */
 package javaapplication16;
 
+import java.io.FileNotFoundException;
+
 public class JavaApplication16 {
 
     
-    public static void main(String[] args) {
-        Menu o = new Menu();
-        o.setup();
+    public static void main(String[] args) throws FileNotFoundException {
+       Menu o = new Menu();
+       o.setup();
     }
     
 }
