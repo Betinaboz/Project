@@ -28,8 +28,7 @@ public class Game implements ActionListener, MouseListener {
     private static int flags;
     private static boolean gameLost = false;
     private static boolean gameWon = false;
-    private static boolean revealed;
-    private static JLayeredPane gamePane = new JLayeredPane();
+    private static String gameStatus;
     private static JFrame gameFrame=new JFrame();
     private static JPanel gamePanel=new JPanel();
     private static JPanel stats=new JPanel();
@@ -414,6 +413,17 @@ public class Game implements ActionListener, MouseListener {
     if (gameLost)
     JOptionPane.showMessageDialog(null, "You lost, try again");
 }
+    public String gameStatus(){
+        if (gameWon&&!gameLost) return gameStatus = "Game won";
+        else return gameStatus = "Game lost";
+        
+    }
+    
+    public void setStatus(String gameStatus){
+        if (gameStatus != null)
+            this.gameStatus = gameStatus;
+    }
+    
 
     
     
@@ -537,6 +547,34 @@ public class Game implements ActionListener, MouseListener {
     public void mouseExited(MouseEvent e) {
        
     }
+    
+    
+   
+    public String toString (  ){
+        Menu menu = new Menu();
+        Loginbutton lg = new Loginbutton();
+        return String.format("Name:%s/n Level:%s/n Game status:%s", menu.getUserText().getText(), lg.getLevel() , gameStatus());
+    }
+    
+    
+    public Game(String name, String level, String status) {//Общо ползване
+     Loginbutton lg = new Loginbutton();
+        lg.setName(name);
+        lg.setLevel(level);
+        setStatus(status);
+    }
+
+    public Game() {//Подразбиране
+        this("    ", "------------------", "  ");
+    }
+
+    
+    
+    
+    
+    
+    
+    
             }
   
  
