@@ -524,10 +524,9 @@ public class Game implements ActionListener, MouseListener {
                                flags--;
                                k=1;
                                
-                            }
-                            if (buttons[i][j].getIcon()==flagImageIcon&&k==0){
+                            }else{
                                 buttons[i][j].setIcon(null);
-                                flags++; 
+                            }
                                
                             } 
                             
@@ -535,7 +534,7 @@ public class Game implements ActionListener, MouseListener {
          }
     }
                 
- }
+ 
         
         flagsLeft.setText(Integer.toString(flags));
          }    
