@@ -8,11 +8,11 @@ package javaapplication16;
 import java.awt.Font;
 
 import javax.swing.ButtonGroup;
-import javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 
 
 

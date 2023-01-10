@@ -7,7 +7,6 @@ package javaapplication16;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
@@ -24,7 +23,7 @@ public class UserFile extends Game {
          Scanner fileReader=new Scanner(new File ("src\\javaapplication16\\users.txt"));
         String txt =super.toString();
         while(fileReader.hasNextLine()){
-         txt+=fileReader.nextLine();
+         txt+=fileReader.nextLine()+"\n";
         
         }
       
