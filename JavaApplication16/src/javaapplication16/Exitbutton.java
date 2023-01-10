@@ -4,19 +4,11 @@
  */
 package javaapplication16;
 
-/**
- *
- * @author Blagovesta
- */
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
-/**
- *
- * @author Blagovesta
- */
 public class Exitbutton implements ActionListener {
   
 private static JButton exit;// бутон за излизане от програмата

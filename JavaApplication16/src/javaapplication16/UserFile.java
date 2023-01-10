@@ -7,31 +7,34 @@ package javaapplication16;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
  *
  * @author Blagovesta
  */
+
 public class UserFile extends Game {
-    //записване на името, нивото и дали е спечелена играта
+    //записване на името, нивото 
     
     void writeInFile() throws FileNotFoundException{
         
+     
          Scanner fileReader=new Scanner(new File ("src\\javaapplication16\\users.txt"));
-    
-        String txt = "---------------- History ------------------\n";
+        String txt =super.toString();
         while(fileReader.hasNextLine()){
-         txt+=super.toString()+fileReader.nextLine()+"\n";
+         txt+=fileReader.nextLine();
+        
         }
       
    
      fileReader.close();
      PrintStream pen = new PrintStream ("src\\javaapplication16\\users.txt");
      pen.println(txt);
-     pen.close();
+     pen.close(); 
      
-}
+} 
     
     void write(){
         try{
@@ -40,5 +43,5 @@ public class UserFile extends Game {
         } catch (FileNotFoundException f){
             System.out.println(f.getMessage());
         }
-    }
+    } 
   }

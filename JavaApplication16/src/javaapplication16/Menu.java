@@ -15,10 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 
-/**
- *
- * @author Blagovesta
- */
+
 public class Menu {
 
     private static JLabel label;

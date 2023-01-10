@@ -47,6 +47,7 @@ public class Loginbutton implements ActionListener {
     public void actionPerformed(ActionEvent e) {
      Game g=new Game();
      Menu o = new Menu();
+     UserFile u=new UserFile();
      
        text=o.getUserText().getText();
        
@@ -69,6 +70,7 @@ public class Loginbutton implements ActionListener {
       } 
      
        g.setupGame();
+       u.write();
        Menu.frame.dispose();
        
            

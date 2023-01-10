@@ -29,13 +29,12 @@ public class Game implements ActionListener, MouseListener {
     private static String level;
     private static boolean gameLost = false;
     private static boolean gameWon = false;
-    private static String gameStatus;
     private static JFrame gameFrame=new JFrame();
     private static JPanel gamePanel=new JPanel();
     private static JPanel stats=new JPanel();
     private static JLabel flagsLeft;
     private static JLabel flag;
-    private int [][] intButtArray;//= new int [width][heigth];
+    private int [][] intButtArray;
     private JButton[][] buttons;  
     ImageIcon flagImageIcon=null;
     ImageIcon blankImageIcon=null;
@@ -294,7 +293,7 @@ public class Game implements ActionListener, MouseListener {
               }
       }
          
-         public void  proba(){
+     /*    public void  proba(){
           minesFormat(buttons);
           for(int i=0;i<width;i++){
               for(int j=0;j<heigth;j++){
@@ -302,7 +301,7 @@ public class Game implements ActionListener, MouseListener {
               }
               System.out.println();
           }
-      }
+      } */
     
     public void attachImg(){// слага изображенията върху бутоните
          loadImages();
@@ -339,7 +338,7 @@ public class Game implements ActionListener, MouseListener {
     
     public void setupGame() {// създава JFrame на играта с полето за игра и статус поле,
         //на което са посочени броя флагове
-      UserFile a=new UserFile();
+   
       setLevel();
      gameFrame=new JFrame();
      gameFrame.setSize((tileWidth*width)+15,(tileHeigth*heigth)+109);
@@ -387,10 +386,7 @@ public class Game implements ActionListener, MouseListener {
             
         }
          minesFormat(buttons);
-         proba();
-         
         
-         
       flag=new JLabel (" flags");
       flag.setBounds(50,20,100,25);
       flag.setFont(new Font("Courier New", Font.PLAIN, 18));
@@ -400,9 +396,10 @@ public class Game implements ActionListener, MouseListener {
       
        gameFrame.setVisible(true);
        
-       a.write();
-      
+     
 }  
+    
+    
     public void win(){// разбира дали играта е спечелена
         int count=0;
         for(int i=0;i<width;i++){
@@ -436,23 +433,7 @@ public class Game implements ActionListener, MouseListener {
     }
     
 }
-    public String gameStatus(){
-        if (gameWon==true) {
-            setStatus("Game won");
-        } 
-        else if (gameLost==true) {
-              setStatus("Game lost");
-                }
-        return gameStatus;
-    }
-    
-    public void setStatus(String gameStatus){
-        if (gameStatus != null)
-            this.gameStatus = gameStatus;
-    }
-    
-
-    
+  
     
       public ImageIcon getScaledImage(String imageString){// напасва изображенията върху размера на бутоните
           ImageIcon imageIcon=new ImageIcon(imageString);
@@ -466,6 +447,7 @@ public class Game implements ActionListener, MouseListener {
     
     @Override
      public void actionPerformed(ActionEvent e) {// какво се случва при натиснат ляв бутон
+        
         loadImages();
         
         for (int i = 0; i < width; i++) {
@@ -480,8 +462,8 @@ public class Game implements ActionListener, MouseListener {
                                                           if (intButtArray[k][l] == 9)
                                                               buttons[k][l].setIcon(mineImageIcon);
                                                               
-                                                           gameLost= true; 
-                                                           
+                                                           gameLost= true;
+                                                          
                                                        }
                                                      
                                              } 
@@ -520,8 +502,10 @@ public class Game implements ActionListener, MouseListener {
               }
            }
           gameWon();
+      
+     
          }   
-
+     
     @Override
     public void mouseClicked(MouseEvent e) {
     }
@@ -591,21 +575,11 @@ public class Game implements ActionListener, MouseListener {
     @Override
     public String toString (  ){
         Menu menu = new Menu();
-        Loginbutton lg = new Loginbutton();
-        return String.format("Name:%s  \n Level:%s  \n Game status:%s \n", menu.getUserText().getText(), getGameLevel() , gameStatus());
+        return String.format("Name:%s , Level:%s  \n", menu.getUserText().getText(), getGameLevel());
     }
     
     
-    public Game(String name, String level, String status) {//Общо ползване
-     Loginbutton lg = new Loginbutton();
-        lg.setName(name);
-        setGameLevel(level);
-        setStatus(status);
-    }
-
-   public Game() {//Подразбиране
-        this("    ", " ", "  ");
-    } 
+   
 
     
     
