@@ -19,7 +19,7 @@ import javax.swing.JButton;
  */
 public class Exitbutton implements ActionListener {
   
-private static JButton exit;
+private static JButton exit;// бутон за излизане от програмата
 
 public JButton setupButton()  {
      exit=new JButton("Exit");

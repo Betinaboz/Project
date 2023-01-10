@@ -6,7 +6,7 @@ package javaapplication16;
 
 import java.io.FileNotFoundException;
 
-public class JavaApplication16 {
+public class Main {
 
     
     public static void main(String[] args) throws FileNotFoundException {

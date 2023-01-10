@@ -6,8 +6,7 @@ package javaapplication16;
 
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import javax.swing.ButtonGroup;
 import javax.swing.*;
 import javax.swing.JFrame;
@@ -20,12 +19,11 @@ import javax.swing.JRadioButton;
  *
  * @author Blagovesta
  */
-public class Menu implements ActionListener{
+public class Menu {
 
     private static JLabel label;
     private static JLabel labelLevel;
     private static JTextField userText;
-    private static JButton button;
     private static JRadioButton easy;
     private static JRadioButton medium;
     private static JRadioButton hard;
@@ -54,7 +52,8 @@ public class Menu implements ActionListener{
     }
    
 
-    public void setup() {
+    public void setup() {     // създава Jframe с бутони за LogIn i Exit и опция 
+        //  за  избиране на ниво
      Exitbutton b = new Exitbutton();
      Loginbutton l=new Loginbutton();
       JPanel panel=new JPanel();
@@ -77,7 +76,7 @@ public class Menu implements ActionListener{
       panel.add(b.setupButton());
       panel.add(l.setupLoginbutton());
    
-       labelLevel=new JLabel("Level:");
+      labelLevel=new JLabel("Level:");
       labelLevel.setBounds(20, 50, 100, 25);
       labelLevel.setFont(new Font("Courier New", Font.PLAIN, 18));
       panel.add(labelLevel);
@@ -118,10 +117,7 @@ public class Menu implements ActionListener{
         return userText;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
     
     public String toString(){
         return String.format("%d",getWhichLevel());

@@ -14,15 +14,15 @@ import java.util.Scanner;
  * @author Blagovesta
  */
 public class UserFile extends Game {
-    
+    //записване на името, нивото и дали е спечелена играта
     
     void writeInFile() throws FileNotFoundException{
         
          Scanner fileReader=new Scanner(new File ("src\\javaapplication16\\users.txt"));
     
-        String txt =super.toString();
+        String txt = "---------------- History ------------------\n";
         while(fileReader.hasNextLine()){
-         txt+=fileReader.nextLine()+"\n";
+         txt+=super.toString()+fileReader.nextLine()+"\n";
         }
       
    

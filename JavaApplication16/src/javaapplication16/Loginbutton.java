@@ -23,19 +23,13 @@ public class Loginbutton implements ActionListener {
     
     
 
-    public String getLevel(){
-        return level;
-    }
     
     public void setName(String name){
         if (name != null)
             this.text= name;
     }
     
-    public void setLevel (String level){
-        if (level != null)
-            this.level= level;
-    }
+   
     
     
 
@@ -62,16 +56,16 @@ public class Loginbutton implements ActionListener {
        
      if(o.getEasy().isSelected()){
       o.setWhichLevel(1);
-      setLevel("Easy");
+      
       
       }
       else if (o.getMedium().isSelected()){
       o.setWhichLevel(2);
-       setLevel("Medium");
+       
       }
       else if(o.getHard().isSelected()){
           o.setWhichLevel(3);
-           setLevel("Hard");
+           
       } 
      
        g.setupGame();

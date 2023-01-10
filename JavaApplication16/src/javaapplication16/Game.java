@@ -26,6 +26,7 @@ public class Game implements ActionListener, MouseListener {
     private static int heigth;
     private static int bombCount;
     private static int flags;
+    private static String level;
     private static boolean gameLost = false;
     private static boolean gameWon = false;
     private static String gameStatus;
@@ -133,9 +134,18 @@ public class Game implements ActionListener, MouseListener {
             this.flagsLeft=flagsLeft;
         }
     }
+        public String getGameLevel(){
+        return  level;
+    }
     
     
-    public void setLevel(){
+    public void setGameLevel (String level){
+        if (level != null)
+            this.level= level;
+    }
+    
+    
+    public void setLevel(){// задават се стойности на броя на бомбите, размера на бутоните и техния брой спрямо избраното ниво
         
         switch (new Menu().getWhichLevel()){
             case 1: 
@@ -144,25 +154,31 @@ public class Game implements ActionListener, MouseListener {
                 bombCount=10;
                 tileHeigth=70;
                 tileWidth=70;
+                setGameLevel("Easy");
                 break;
+               
+                
             case 2:
                 heigth=15;
                 width=15;
                 bombCount=15;
                 tileHeigth=50;
                 tileWidth=50;
+                setGameLevel("Medium");
                 break;
+                
             case 3:
                 heigth=20;
                 width=20;
                 bombCount=20;
                 tileHeigth=40;
                 tileWidth=40;
+                setGameLevel("Hard");
                 break;
         }
     }
     
-     public void loadImages(){
+     public void loadImages(){// инициализиране на изображенията
         flagImageIcon=getScaledImage("src\\image\\flag.png");
         blankImageIcon=getScaledImage("src\\image\\blank.png");
         mineImageIcon=getScaledImage("src\\image\\mine.png");
@@ -176,7 +192,7 @@ public class Game implements ActionListener, MouseListener {
         eigthImageIcon=getScaledImage("src\\image\\8.png");
     }
      
-     public int[] randomBombs(int width, int heigth, int bombs){
+     public int[] randomBombs(int width, int heigth, int bombs){// метод за избиране на местата на произволни бомби върху бутоните
          Random rand=new Random();
          int rndmines[]=new int [bombs];
          int rndNo;
@@ -202,7 +218,9 @@ public class Game implements ActionListener, MouseListener {
      
      
      
-      public void minesFormat(JButton buton[][]){
+      public void minesFormat(JButton buton[][]){// създава се полето за игра от 
+          //бутони според избраното ниво и се пресмята броя на бомбите около квадратчетата,
+          //след което им се задава определено число, отговарящо на този брой 
         setLevel();
         intButtArray=new int[width][heigth];
          for(int i=0;i<width;i++){
@@ -211,11 +229,6 @@ public class Game implements ActionListener, MouseListener {
              }
          }
       
-           
-                     
-                 
-             
-         
          int mine[]=randomBombs(width, heigth, bombCount);
          int count=0;
          for(int i=0;i<width;i++){
@@ -291,7 +304,7 @@ public class Game implements ActionListener, MouseListener {
           }
       }
     
-    public void attachImg(){
+    public void attachImg(){// слага изображенията върху бутоните
          loadImages();
          for(int i=0;i<width;i++){
              for(int j=0;j<heigth;j++){
@@ -324,7 +337,8 @@ public class Game implements ActionListener, MouseListener {
     
      
     
-    public void setupGame() {
+    public void setupGame() {// създава JFrame на играта с полето за игра и статус поле,
+        //на което са посочени броя флагове
       UserFile a=new UserFile();
       setLevel();
      gameFrame=new JFrame();
@@ -389,7 +403,7 @@ public class Game implements ActionListener, MouseListener {
        a.write();
       
 }  
-    public void win(){
+    public void win(){// разбира дали играта е спечелена
         int count=0;
         for(int i=0;i<width;i++){
             for(int j=0; j<heigth; j++){
@@ -404,16 +418,23 @@ public class Game implements ActionListener, MouseListener {
         }
     }
     
-    public void gameWon(){
+    public void gameWon(){// какво да се случи, ако играт е спечелена
         win();
         if (gameWon)
     JOptionPane.showMessageDialog(null, "Congrats!");
     }
     
     
-    public void gameLost(){
-    if (gameLost)
+    public void gameLost(){// какво да направи, ако играт е загубена
+    if (gameLost){
     JOptionPane.showMessageDialog(null, "You lost, try again");
+    for (int k = 0; k < width; k++) {
+           for (int l = 0; l < heigth; l++){
+                buttons[k][l].removeActionListener(this);
+           }
+    }
+    }
+    
 }
     public String gameStatus(){
         if (gameWon==true) {
@@ -433,7 +454,7 @@ public class Game implements ActionListener, MouseListener {
 
     
     
-      public ImageIcon getScaledImage(String imageString){
+      public ImageIcon getScaledImage(String imageString){// напасва изображенията върху размера на бутоните
           ImageIcon imageIcon=new ImageIcon(imageString);
           Image image=imageIcon.getImage();
           Image newImage=image.getScaledInstance(tileWidth,tileHeigth,java.awt.Image.SCALE_SMOOTH);
@@ -444,7 +465,7 @@ public class Game implements ActionListener, MouseListener {
     
     
     @Override
-     public void actionPerformed(ActionEvent e) {
+     public void actionPerformed(ActionEvent e) {// какво се случва при натиснат ляв бутон
         loadImages();
         
         for (int i = 0; i < width; i++) {
@@ -459,7 +480,6 @@ public class Game implements ActionListener, MouseListener {
                                                           if (intButtArray[k][l] == 9)
                                                               buttons[k][l].setIcon(mineImageIcon);
                                                               
-                                                           buttons[k][l].removeActionListener(this);
                                                            gameLost= true; 
                                                            
                                                        }
@@ -507,7 +527,7 @@ public class Game implements ActionListener, MouseListener {
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
+    public void mousePressed(MouseEvent e) {// какво се случва при натиснат десен бутон
         loadImages();
         int k=0;
  if (SwingUtilities.isRightMouseButton(e)){
@@ -526,18 +546,31 @@ public class Game implements ActionListener, MouseListener {
                                
                             }else{
                                 buttons[i][j].setIcon(null);
+                                flags ++;
                             }
                                
                             } 
                             
-                        }
-         }
+                        
+        
+                if (flags<0){
+                    gameLost = true;
+                    
+                    buttons[i][j].removeMouseListener(this);
+                    } 
+                }
+               }
+                gameLost();
+              
     }
                 
  
-        
+         if (flags>=0)
         flagsLeft.setText(Integer.toString(flags));
-         }    
+       
+            
+          
+    }
 
     @Override
     public void mouseReleased(MouseEvent e) {
@@ -559,14 +592,14 @@ public class Game implements ActionListener, MouseListener {
     public String toString (  ){
         Menu menu = new Menu();
         Loginbutton lg = new Loginbutton();
-        return String.format("Name:%s  \n Level:%s  \n Game status:%s \n", menu.getUserText().getText(), lg.getLevel() , gameStatus());
+        return String.format("Name:%s  \n Level:%s  \n Game status:%s \n", menu.getUserText().getText(), getGameLevel() , gameStatus());
     }
     
     
     public Game(String name, String level, String status) {//Общо ползване
      Loginbutton lg = new Loginbutton();
         lg.setName(name);
-        lg.setLevel(level);
+        setGameLevel(level);
         setStatus(status);
     }
 
