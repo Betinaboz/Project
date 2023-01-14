@@ -24,7 +24,7 @@ public class Menu {
     private static JRadioButton easy;
     private static JRadioButton medium;
     private static JRadioButton hard;
-    private static int whichLevel;
+    private int whichLevel;
     public static JFrame frame=new JFrame();
     
 
@@ -57,6 +57,8 @@ public class Menu {
       frame.setSize(500,300);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.add(panel);
+      frame.setTitle("Menu");
+      frame.setResizable(false);
       panel.setLayout(null);
       panel.setBackground(new java.awt.Color(211, 234, 245));
       

@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -49,13 +50,12 @@ public class Loginbutton implements ActionListener {
      Menu o = new Menu();
      UserFile u=new UserFile();
      
-       text=o.getUserText().getText();
+    text=o.getUserText().getText();
+    boolean match=text.matches("^[A-Za-z](?=.{1,25}$)[A-Za-z]*(?:\\h+[A-Za-z]*)*$"); //позволява на потребителя да въведе име, което да
+     // съдържа само малки и големи букви и интервал до 25 на брой 
        
-      boolean match=text.matches("^[A-Za-z](?=.{1,20}$)[A-Za-z]*(?:\\h+[A-Za-z]*)*$"); //позволява на потребителя да въведе име, което да
-     // съдържа само малки и големи букви и интервал до 20 на брой 
        if (match==true){
-       
-     if(o.getEasy().isSelected()){
+    if(o.getEasy().isSelected()){
       o.setWhichLevel(1);
       
       
@@ -73,13 +73,12 @@ public class Loginbutton implements ActionListener {
        u.write();
        Menu.frame.dispose();
        
-           
-    } 
-   else {
-           throw new java.util.InputMismatchException("Enter letters!");
+      }
+      else JOptionPane.showMessageDialog(null,"Enter letters only (between 0-25 characters)","Error",JOptionPane.ERROR_MESSAGE);
+       }
+  
     }
 
-    }
+    
+    
 
-   
-}

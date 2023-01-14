@@ -22,20 +22,16 @@ import javax.swing.SwingUtilities;
 
 
 
-/**
- *
- * @author Blagovesta
- */
 public class Game implements ActionListener, MouseListener {
     private static int tileHeigth; 
     private static int tileWidth;
     private static int width;
     private static int heigth;
-    private static int bombCount;
-    private static int flags;
+    private int bombCount;
+    private int flags;
     private static String level;
-    private static boolean gameLost = false;
-    private static boolean gameWon = false;
+    private boolean gameLost = false;
+    private boolean gameWon = false;
     private static JFrame gameFrame=new JFrame();
     private static JPanel gamePanel=new JPanel();
     private static JPanel stats=new JPanel();
@@ -352,6 +348,7 @@ public class Game implements ActionListener, MouseListener {
      gameFrame.setLayout(null);
      gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      gameFrame.setResizable(false);
+     gameFrame.setTitle("Minesweeper");
      
       gamePanel=new JPanel();
       gamePanel.setBounds(0,70, tileWidth*width, tileHeigth*heigth);
@@ -399,15 +396,10 @@ public class Game implements ActionListener, MouseListener {
       flag.setFont(new Font("Courier New", Font.PLAIN, 18));
       stats.add(flag);
    
-      
-      
-       gameFrame.setVisible(true);
-       
-     
+        gameFrame.setVisible(true);
+          
 }  
-    
-    
-    public void win(){// разбира дали играта е спечелена
+       public void win(){// разбира дали играта е спечелена
         int count=0;
         for(int i=0;i<width;i++){
             for(int j=0; j<heigth; j++){
